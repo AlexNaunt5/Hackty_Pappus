@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type = "text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type = "text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type = "text/css" href="design.css">
+
+        <script> window.onload = function () {
+			var dps = []; // dataPoints
+			var chart = new CanvasJS.Chart("chartContainer", {
+				title :{
+					text: "Temperature behaviour"
+				},
+	axisY: {
+		includeZero: false
+	},      
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}]
+});
+
+var xVal = 32;
+var yVal = 41; 
+var updateInterval = 500;
+var dataLength = 20; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+	count = count || 1;
+
+	for (var j = 0; j < count; j++) {
+		yVal = yVal +  Math.round( 5+ Math.random() *(-5-5));
+		dps.push({
+			x: xVal,
+			y: yVal
+		});
+		xVal++;
+	}
+
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
+
+	chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+
+}
+</script>
+</head>
+<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class = "container" > 
+			  <a class="navbar-brand" href="#">Perfect Bark</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  
+			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item active">
+					<a class="nav-link" href="C:\Users\alexn\OneDrive\Documentos\FinalHack\main\Index.html"> Home <span class="sr-only">(current)</span></a>
+				  </li>
+			
+				  <li class="nav-item">
+					<a class="nav-link" href="C:\Users\alexn\OneDrive\Documentos\FinalHack\main\Pantalla_opciones.html">Menu</a>
+				  </li>
+			
+				  <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  Join Us
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					  <a class="dropdown-item" href="C:\Users\alexn\OneDrive\Documentos\FinalHack\main\index_guasso.html">Login <i class ="fa fa-user"> </i> </a>
+					  <a class="dropdown-item" href="C:\Users\alexn\OneDrive\Documentos\FinalHack\main\signup.html">Sign Up <i class ="fa fa-user-plus"> </i> </a>
+					  <div class="dropdown-divider"></div>
+					  <a class="dropdown-item" href="#">Contact</a>
+					</div>
+				  </li>
+				</ul>
+				
+				<form class="form-inline my-2 my-lg-0">
+				  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+				
+				</div>
+			  </div>
+			</nav>
+	<div id="chartContainer" style="height: 370px; width:100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
